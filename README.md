@@ -68,6 +68,7 @@ wish without causing opening a route to attack your Django passwords.
 
 TODO TO START
 =============
+
 * SET UP DATABASE
 Create a user account and database
 
@@ -77,10 +78,13 @@ sudo -u postgres createdb [dbname]
 Set up a password
 
 sudo -u postgres psql
-ALTER USER postgres with encrypted password 'your_password';
+ALTER USER [username] with encrypted password 'your_password';
 
+* CREATE A PROJECT
+django-admin.py startproject --template=https://github.com/harry81/django-skel/zipball/master [project name]
 
 * CONFIGURE IT UP FOR DJANGO
+vi [project name]/settings/common.py 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -92,6 +96,12 @@ DATABASES = {
     }
 }
 
+* ADD YOUR APP THIRD_PARTY_APPS
+LOCAL_APPS = (
+    'apps.[project name]',
+)
+
+
 * PREPARE ALL TABLES
 python manage.py syncdb
 
@@ -100,9 +110,8 @@ python manage.py runserver
 -> See using your browser if a web server works well.
 
 * CREATE YOUR OWN APP
-django-admin.py startapp [app name]
-
-* ADD YOUR APP THIRD_PARTY_APPS
-
-* ADD YOUR APP
+cd [project name]
 django-admin.py startapp --template=https://github.com/harry81/django-skel-app/zipball/master [project name]
+mv [project name]/*  apps
+rm -rf [project name]
+
