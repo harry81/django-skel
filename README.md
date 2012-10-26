@@ -64,3 +64,45 @@ to a value which is generated mainly for development environment.
 
 This setup allows you to easily keep your site in a public repo if you so 
 wish without causing opening a route to attack your Django passwords.
+
+
+TODO TO START
+=============
+* SET UP DATABASE
+Create a user account and database
+
+sudo -u postgres createuser [username]
+sudo -u postgres createdb [dbname]
+
+Set up a password
+
+sudo -u postgres psql
+ALTER USER postgres with encrypted password 'your_password';
+
+
+* CONFIGURE IT UP FOR DJANGO
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'map',
+        'USER': 'map',
+        'PASSWORD': 'jkl',
+        'HOST': '',
+        'PORT': '',        
+    }
+}
+
+* PREPARE ALL TABLES
+python manage.py syncdb
+
+* START DJANGO DEVELOPMENT SERVER
+python manage.py runserver
+-> See using your browser if a web server works well.
+
+* CREATE YOUR OWN APP
+django-admin.py startapp [app name]
+
+* ADD YOUR APP THIRD_PARTY_APPS
+
+* ADD YOUR APP
+django-admin.py startapp --template=https://github.com/harry81/django-skel-app/zipball/master [project name]
